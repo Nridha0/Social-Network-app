@@ -1,0 +1,16 @@
+{
+  "name": "social-network-app-nosql",
+  "version": "1.0.0",
+  "description": "back end mongoose project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Nridha",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.5.2"
+  }
+}
