@@ -1,12 +1,12 @@
-const { Schema, model } = require('mongoose');
-//const moment = require ('moment')
+const { Schema, model, Types } = require('mongoose');
+const moment = require ('moment');
 const reactionSchema = new Schema(
   {
     reactionId: {
       type: Schema.Types.ObjectId,
       default: () => new Types.ObjectId(),
     },
-    responseBody: {
+    reactionBody: {
       type: String,
       required: true,
       maxlength: 280,
@@ -29,6 +29,6 @@ const reactionSchema = new Schema(
   }
 );
 
-const Reaction = model('reaction', reactionSchema)
 
-module.exports = Reaction;
+
+module.exports = reactionSchema;

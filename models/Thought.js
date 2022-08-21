@@ -1,8 +1,7 @@
-const { Schema, model } = require('mongoose');
-//const moment = require ('moment')
-const Reaction = require('./Reaction');
+const { Schema, model, Types } = require('mongoose');
+const reactionSchema = require('./Reaction');
+const moment = require ('moment')
 
-// Schema to create Post model
 const thoughtSchema = new Schema(
     {
         thoughtTxt:{
@@ -19,6 +18,7 @@ const thoughtSchema = new Schema(
             type: String,
             required: true,
         },
+     
         reactions: [reactionSchema],
     
     },
@@ -30,11 +30,10 @@ const thoughtSchema = new Schema(
           id: false,
     }
 );
-
-thoughtSchema.virtuals('reactionCount')
-.get(function(){
-    return this.reactions.length;
-})
 const Thought = model('Thought', thoughtSchema);
+ thoughtSchema.virtual('reactionCount').get(function(){
+    return this.reactions.length;
+ })
 
-model.exports = Thought;
+
+module.exports = Thought;

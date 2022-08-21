@@ -20,15 +20,19 @@ module.exports = {
         )
         .catch((err) => res.status(500).json(err));
     },
+
     createUser(req, res) {
       User.create(req.body)
         .then((dbUserData) => res.json(dbUserData))
         .catch((err) => res.status(500).json(err));
     },
+
     updateUser(req, res) {
+      console.log(req.body)
       User.findOneAndUpdate(
-        { _id: req.params.usertId },
-        { $set: req.body },
+        
+        { _id: req.params.userId },
+        { $set: {username:req.body.username,email:req.body.email }},
         { runValidators: true, new: true }
       )
         .then((user) =>
@@ -36,11 +40,11 @@ module.exports = {
             ? res.status(404).json({ message: 'No user with this id!' })
             : res.json(user)
         )
-        .catch((err) => {
-          console.log(err);
-          res.status(500).json(err);
+        // .catch((err) => {
+        //   console.log(err);
+        //   res.status(500).json(err);
   
-        });
+        // });
       },
   
     deleteUser(req, res) {
@@ -69,7 +73,7 @@ module.exports = {
     },
   
   
-    RemoveFriend(req, res) {
+    removeFriend(req, res) {
       User.findOneAndUpdate(
         { _id: req.params.userId },
         { $pull: { friends: req.params.friendId } },
@@ -77,11 +81,13 @@ module.exports = {
       )
         .then((friend) =>
             !friend
-              ? res.status(404).json({ message: "No User find with this ID!" })
-              : res.json(user)
+              ? res.status(404).json({ message: "No Friend find with this ID!" })
+              : res.json(friend)
         )
         .catch((err) => res.status(500).json(err));
     },
+
+    
   };
   
 
